@@ -14,7 +14,6 @@ data class Book(
     val download_count: Int
 )
 
-
 data class Author(
     val name: String,
     val birth_year: Int,
