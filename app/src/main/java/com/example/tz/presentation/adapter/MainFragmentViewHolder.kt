@@ -24,7 +24,7 @@ class MainFragmentViewHolder(val binding: MainItemBinding) : RecyclerView.ViewHo
                 .placeholder(R.drawable.book_placeholder)
                 .into(binding.cardImage)
             binding.cardTitle.text = book.title
-            binding.cardPerson.text = book.authors.first().name
+            binding.cardPerson.text = book.authors.firstOrNull()?.name ?: "Загрузка..."
         }
     }
 }

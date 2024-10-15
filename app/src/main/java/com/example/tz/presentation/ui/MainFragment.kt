@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainFragmentViewModel by viewModel()
-    lateinit var adapter : MainFragmentAdapter
+    private lateinit var adapter : MainFragmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +36,36 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MainFragmentAdapter{ bookItem ->
-            Toast.makeText(requireContext(), "Вы нажали на книгу ${bookItem.title}", Toast.LENGTH_SHORT).show()
+        setupAdapter()
+        observeBooks()
+        observeNetworkState()
+    }
+    fun observeNetworkState() {
+        lifecycleScope.launch {
+            viewModel.networkState.collectLatest { isAvailable ->
+                var message = ""
+                if (isAvailable) {
+                    message = "online mode"
+                } else {
+                    message = "offline mode"
+                }
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
         }
-        binding.mainRv.adapter = adapter
+    }
 
+    fun observeBooks() {
         lifecycleScope.launch {
             viewModel.books.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
             }
         }
+    }
+
+    fun setupAdapter() {
+        adapter = MainFragmentAdapter{ bookItem ->
+            Toast.makeText(requireContext(), "Вы нажали на книгу ${bookItem.title}", Toast.LENGTH_SHORT).show()
+        }
+        binding.mainRv.adapter = adapter
     }
 }
