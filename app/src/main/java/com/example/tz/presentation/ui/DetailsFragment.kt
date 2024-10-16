@@ -16,7 +16,6 @@ import com.example.tz.presentation.viewmodel.MainFragmentViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() =  _binding!!
