@@ -1,6 +1,7 @@
 package com.example.tz.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -24,12 +25,19 @@ class MainFragmentViewModel(
    private val _networkState = MutableStateFlow(networkUtils.isInternetWorking())
     val networkState = _networkState.asStateFlow()
 
+    val _selectedBook = MutableLiveData<Book>()
+    val selectedBook: LiveData<Book> = _selectedBook
+
     fun loadBooks() {
         viewModelScope.launch {
             useCase().cachedIn(viewModelScope).collect{
                 _books.value = it
             }
         }
+    }
+
+    fun selectBook(book: Book) {
+        _selectedBook.value = book
     }
 
     fun observeNetworkState() {

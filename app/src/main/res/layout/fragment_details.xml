@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Back" />
+
+        <ImageView
+            android:id="@+id/bookCover"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/backButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/book_placeholder" />
+
+        <TextView
+            android:id="@+id/bookTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/bookCover"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Book Title" />
+
+        <TextView
+            android:id="@+id/bookAuthors"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/bookTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Authors: John Doe, Jane Smith" />
+
+        <TextView
+            android:id="@+id/bookSubjects"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/bookAuthors"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Subjects: Fiction, Adventure" />
+
+        <TextView
+            android:id="@+id/bookLanguages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/bookSubjects"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Languages: English, French" />
+
+        <TextView
+            android:id="@+id/bookDownloadCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/bookLanguages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Download Count: 1000" />
+
+        <Button
+            android:id="@+id/pdfButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" PDF"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/bookDownloadCount"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/black"/>
+
+        <Button
+            android:id="@+id/epubButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" EPUB"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/bookDownloadCount"
+            app:layout_constraintStart_toEndOf="@id/pdfButton"
+            android:layout_marginStart="35dp"
+            android:backgroundTint="@color/black"/>
+
+        <Button
+            android:id="@+id/rdf_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RDF"
+            app:layout_constraintTop_toBottomOf="@id/bookDownloadCount"
+            app:layout_constraintStart_toEndOf="@+id/epubButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="35dp"
+            android:backgroundTint="@color/black"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

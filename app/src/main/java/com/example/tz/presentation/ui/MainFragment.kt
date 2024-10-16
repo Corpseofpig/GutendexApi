@@ -14,11 +14,12 @@ import com.example.tz.presentation.adapter.MainFragmentAdapter
 import com.example.tz.presentation.viewmodel.MainFragmentViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-    private val viewModel: MainFragmentViewModel by viewModel()
+    private val viewModel: MainFragmentViewModel by sharedViewModel()
     private lateinit var adapter : MainFragmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +65,17 @@ class MainFragment : Fragment() {
 
     fun setupAdapter() {
         adapter = MainFragmentAdapter{ bookItem ->
-            Toast.makeText(requireContext(), "Вы нажали на книгу ${bookItem.title}", Toast.LENGTH_SHORT).show()
+            viewModel.selectBook(bookItem)
+            goToBookDetails()
         }
         binding.mainRv.adapter = adapter
     }
+
+    fun goToBookDetails() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, DetailsFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
 }
